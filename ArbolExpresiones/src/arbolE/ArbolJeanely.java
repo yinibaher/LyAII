@@ -23,23 +23,18 @@ public class ArbolJeanely {
     final String variables = "abcdefghijklmnopqrstuvwxyz";
     private Nodo raiz;
     
-    //30 de Junio
-    String[] temporales ={"T1","T2","T3","T4","T5"};
-    
     HashMap<String,String> tablaSimbolos;
     HashMap<String,String> erroresSemanticos;
-    HashMap<String,String> producciones;
-    int paso;
+    HashMap<String,String> producciones; 
+    ArrayList<String> reglasEjecutadas;
+    int paso; 
     
-    ArrayList<String> reglasEjecutadas; //1 de Julio
     
     public ArbolJeanely(){
-        reglasEjecutadas = new ArrayList(); //1 de Julio
-        
+        reglasEjecutadas = new ArrayList(); 
         tablaSimbolos = new HashMap();
         erroresSemanticos = new HashMap();
-        producciones = new HashMap();
-        
+        producciones = new HashMap();     
         arbolNodo = new Stack<Nodo>();
         caracter = new Stack<String>();
         paso = 0;
@@ -64,74 +59,53 @@ public class ArbolJeanely {
     
     public void guardar(){
         paso++;
-        Nodo izquierdo = (Nodo) arbolNodo.pop();
-        Nodo derecho = (Nodo) arbolNodo.pop();
-        String operador = caracter.peek();
-            //  Peek sirve para mirar el elemento que está en la cima o 
-            //  al principio sin sacarlo de la estructura.
+        Nodo derecho = arbolNodo.pop();
+        Nodo izquierdo = arbolNodo.pop();        
+        String operador = caracter.pop();
         
-        arbolNodo.push(new Nodo(derecho,caracter.pop(),izquierdo));
-        if (operador.equals("+")){
-            String reglaE = "E.nodo = new Nodo(+,E1.nodo,T.Nodo)";
-            reglasEjecutadas.add("P" + paso + ": "+ reglaE); 
-        }
+        arbolNodo.push(new Nodo(izquierdo,operador,derecho));
         
-        if (operador.equals("*")){
-            String reglaE = "E.nodo = new Nodo(*,E1.nodo,T.Nodo)";
-            reglasEjecutadas.add("P" + paso + ": "+ reglaE);
-        }
-        
-        if (operador.equals("/")){
-            String reglaE = "E.nodo = new Nodo(/,E1.nodo,T.Nodo)";
-            reglasEjecutadas.add("P" + paso + ": "+ reglaE);
-        }
-        
-        if (operador.equals("-")){
-            String reglaE = "E.nodo = new Nodo(-,E1.nodo,T.Nodo)";
-            reglasEjecutadas.add("P" + paso + ": "+ reglaE);
-        }
+        String reglaE = "E.nodo = new Nodo("+operador+",E1.nodo,T.Nodo)";
+        reglasEjecutadas.add("P" + paso + ": "+ reglaE); 
     }//guardar
     
     public Nodo crear(String expresion){
-        //1. Considerae la expresión como un conjunto de tokens
-            // La clase StringTokenizer en Java (perteneciente al paquete java.util) 4
-            // permite dividir una cadena de texto en partes más pequeñas llamadas 
-            // tokens basándose en un conjunto de delimitadores.
-        StringTokenizer tokenizer;
-        String token;
-        paso = 0;             
-        
-        //2. Separación de tokens de la expresión
-        tokenizer = new StringTokenizer(expresion,espacios+aritmeticos,true);
-        
-        //3. Mientras existan tokens
+        //1. Considerar la expresión como un conjunto de tokens y separarlos
+        paso = 0;
+        StringTokenizer tokenizer = new StringTokenizer(expresion,espacios+aritmeticos,true);
+                   
+        //2. Mientras existan tokens
         while(tokenizer.hasMoreTokens()){
-            //4. Omitir espacios en blanco
+            String token;            
             token = tokenizer.nextToken();
-            System.out.println("Token: "+token);          
-            if(espacios.indexOf(token)>=0){
-                System.out.println("Omitiendo espacios...");
+            System.out.println("Token: "+token); 
             
-            }else if (aritmeticos.indexOf(token)<0){//5. No es un operador aritmético
-                //6. Extraer de la pila los términos que estaban
+            //3. Omitir espacios en blanco
+            if(espacios.contains(token)){
+                System.out.println("Omitiendo espacios...");
+                
+            //4. Si no es un operador aritmético
+            }else if (!aritmeticos.contains(token)){
+                //5. Meter el toekn a la pila de nodos
                 arbolNodo.push(new Nodo(token));
                 paso++;
                 String regla = "T.nodo = new Hoja(id<"+token+">, id.entrada_"+token+")";
                 reglasEjecutadas.add("P"+paso+": "+regla);
                 
+            //5.Tratar tokens dentro de paréntesis    
             }else if(token.equals(")")){
-                //7. Tratar tokens que no son paréntesis             
+                //6. Guardar mientras no llegue al paréntesis que abrió            
                 while(!caracter.empty() && !caracter.peek().equals("(")){
                     guardar();
                 }//while
                 caracter.pop();
             }else{
                 if (!token.equals("(") && !caracter.empty()){
-                    String exa = (String) caracter.peek();
+                    String exa = caracter.peek();
                     while(!exa.equals("(") && !caracter.empty() && aritmeticos.indexOf(exa)>=aritmeticos.indexOf(token)){
                         guardar();
                         if (!caracter.empty()){
-                            exa = (String) caracter.peek();
+                            exa = caracter.peek();
                         }//if
                     }//while
                 }//if
@@ -142,13 +116,12 @@ public class ArbolJeanely {
             if(caracter.peek().equals("(")){
                 caracter.pop();
             }else{
-                guardar();
-                raiz=(Nodo) arbolNodo.peek();
+                guardar();                
             }
         }//while
+        raiz= arbolNodo.peek();
         return raiz;
-    }//Nodo Crear
-    
+    }//Nodo Crear   
     
     
 }//class
