@@ -533,7 +533,7 @@ public class FrameInterfaz extends javax.swing.JFrame {
 
     private void btnCompilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompilaActionPerformed
         String datos = "";
-        Arbol a = new Arbol();
+        ArbolJeanely a = new ArbolJeanely();
         datos = txtExpresion.getText();
         
         Nodo arbolExpresion = a.crear(datos);

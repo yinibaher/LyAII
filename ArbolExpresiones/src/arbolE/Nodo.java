@@ -27,7 +27,7 @@ public class Nodo {
         this.dato = dato;
     }//Constructor
     
-    public Nodo(Nodo derecho, String dato, Nodo izquierdo) {
+    public Nodo(Nodo izquierdo, String dato, Nodo derecho) {
         this.dato = dato;
         this.izq = izquierdo;
         this.der = derecho;

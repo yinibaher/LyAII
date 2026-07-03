@@ -64,13 +64,13 @@ public class Arbol {
     
     public void guardar(){
         paso++;
-        Nodo izquierdo = (Nodo) arbolNodo.pop();
         Nodo derecho = (Nodo) arbolNodo.pop();
+        Nodo izquierdo = (Nodo) arbolNodo.pop();        
         String operador = caracter.peek();
             //  Peek sirve para mirar el elemento que está en la cima o 
             //  al principio sin sacarlo de la estructura.
         
-        arbolNodo.push(new Nodo(derecho,caracter.pop(),izquierdo));
+        arbolNodo.push(new Nodo(izquierdo,caracter.pop(),derecho));
         if (operador.equals("+")){
             String reglaE = "E.nodo = new Nodo(+,E1.nodo,T.Nodo)";
             reglasEjecutadas.add("P" + paso + ": "+ reglaE); 
