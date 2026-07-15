@@ -36,7 +36,14 @@ public class ArbolAgenteIA {
     ArrayList<String> reglasEjecutadas;
     private ArrayList<String[]> tripletas;
     
+    public String emu86; //15 de Julio
+    
     public ArbolAgenteIA(){
+        emu86 = "; IBARRA HERNANDEZ JEANELY FERNANDA \n"+
+                ".MODEL SMALL \n" + 
+                ".STACK \n" + 
+                ".DATA \n";
+        
         tablaSimbolos = new HashMap<>();
         erroresSemanticos = new HashMap<>();
         arbolNodo = new Stack<Nodo>();
@@ -191,6 +198,7 @@ public class ArbolAgenteIA {
                 Nodo hoja = new Nodo(token);
                 hoja.setValor(Double.parseDouble(tablaSimbolos.get(token)));
                 arbolNodo.push(hoja);
+                emu86+=token+" dw "+ (int)hoja.getValor() + "\n";
                 paso++;
                 String regla = "T.nodo = new Hoja(id<"+token+">, id.entrada_"+token+")";
                 reglasEjecutadas.add("P"+paso+": "+regla);

@@ -9,8 +9,12 @@ import java.awt.Image;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 /**
  *
@@ -24,20 +28,25 @@ public class FrameInterfaz extends javax.swing.JFrame {
     FrameTripletas tripletas;
     String nPolaca;
     int temp;
+    String izquierdo, derecho;
+    String emuLocal="";
+    int contador=0;
     
     /**
      * Creates new form FrameInterfaz
      */
     public FrameInterfaz() {
         initComponents();
-        setExtendedState(this.MAXIMIZED_BOTH);
+        setLocationRelativeTo(null);
         
         EscalarImagen("/arbolE/escudo.png",lblTec,90,90);
         EscalarImagen("/arbolE/yo.jpeg",lblYo,90,110);
         EscalarImagen("/arbolE/logo.png",lblLogo,80,80);
         
         nPolaca = "";
-        temp = 0;        
+        temp = 0;
+        izquierdo = "";
+        derecho = "";        
     }
     
     public void EscalarImagen(String urlImagen, javax.swing.JLabel lbl, int ancho, int alto ){            
@@ -138,7 +147,7 @@ public class FrameInterfaz extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 463, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 210, Short.MAX_VALUE)
                 .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblYo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -222,7 +231,7 @@ public class FrameInterfaz extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtExpresion, javax.swing.GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE)
+                .addComponent(txtExpresion, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnTripletas, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -331,12 +340,12 @@ public class FrameInterfaz extends javax.swing.JFrame {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 324, Short.MAX_VALUE)
+            .addGap(0, 274, Short.MAX_VALUE)
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel5Layout.createSequentialGroup()
-                    .addGap(0, 73, Short.MAX_VALUE)
+                    .addGap(0, 48, Short.MAX_VALUE)
                     .addComponent(jLabel6)
-                    .addGap(0, 73, Short.MAX_VALUE)))
+                    .addGap(0, 48, Short.MAX_VALUE)))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -366,12 +375,12 @@ public class FrameInterfaz extends javax.swing.JFrame {
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 220, Short.MAX_VALUE)
+            .addGap(0, 170, Short.MAX_VALUE)
             .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel7Layout.createSequentialGroup()
-                    .addGap(0, 73, Short.MAX_VALUE)
+                    .addGap(0, 48, Short.MAX_VALUE)
                     .addComponent(jLabel4)
-                    .addGap(0, 73, Short.MAX_VALUE)))
+                    .addGap(0, 48, Short.MAX_VALUE)))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -401,12 +410,12 @@ public class FrameInterfaz extends javax.swing.JFrame {
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 232, Short.MAX_VALUE)
+            .addGap(0, 182, Short.MAX_VALUE)
             .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel8Layout.createSequentialGroup()
-                    .addGap(0, 73, Short.MAX_VALUE)
+                    .addGap(0, 48, Short.MAX_VALUE)
                     .addComponent(jLabel2)
-                    .addGap(0, 73, Short.MAX_VALUE)))
+                    .addGap(0, 48, Short.MAX_VALUE)))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -437,12 +446,12 @@ public class FrameInterfaz extends javax.swing.JFrame {
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 304, Short.MAX_VALUE)
+            .addGap(0, 254, Short.MAX_VALUE)
             .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel9Layout.createSequentialGroup()
-                    .addGap(0, 73, Short.MAX_VALUE)
+                    .addGap(0, 48, Short.MAX_VALUE)
                     .addComponent(jLabel5)
-                    .addGap(0, 73, Short.MAX_VALUE)))
+                    .addGap(0, 48, Short.MAX_VALUE)))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -473,12 +482,12 @@ public class FrameInterfaz extends javax.swing.JFrame {
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 241, Short.MAX_VALUE)
+            .addGap(0, 191, Short.MAX_VALUE)
             .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel10Layout.createSequentialGroup()
-                    .addGap(0, 73, Short.MAX_VALUE)
+                    .addGap(0, 48, Short.MAX_VALUE)
                     .addComponent(jLabel3)
-                    .addGap(0, 73, Short.MAX_VALUE)))
+                    .addGap(0, 48, Short.MAX_VALUE)))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -553,7 +562,7 @@ public class FrameInterfaz extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jNotacionPolaca, javax.swing.GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE)
+                .addComponent(jNotacionPolaca, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnDescripcipn, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -605,7 +614,17 @@ public class FrameInterfaz extends javax.swing.JFrame {
         postOrden(arbolExpresion);
         intermedio(arbolExpresion);
         
+        arbol.emu86+=".CODE \n" +
+                     "MOV AX, @DATA \n" +
+                     "MOV DS,AX \n"; //15 de Julio
         
+        String finalEmu = arbol.emu86+this.emuLocal+"\n"; 
+        finalEmu += "\nMOV AX, 4c00h" + "\nint 21h \nend";
+        showMessageDialog(null,finalEmu); //15 de Julio
+        contador++;
+        generaEmutasm(finalEmu,contador);
+        Sonido();
+             
         try {
             FileWriter writer = new FileWriter("C:\\LYA2\\ReglasSemanticas.txt");            
             writer.write(jtxtReglas.getText());
@@ -643,6 +662,8 @@ public class FrameInterfaz extends javax.swing.JFrame {
             cuadruplos.dispose();
             cuadruplos = null;
         }
+        
+        emuLocal="";
     }//GEN-LAST:event_btnCleanActionPerformed
 
     private void btnOptimizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOptimizarActionPerformed
@@ -669,12 +690,73 @@ public class FrameInterfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTripletasActionPerformed
     
 
+    public void generaEmutasm(String emu, int i){
+        try{
+            FileWriter escritor = new FileWriter("e"+i+".asm");
+            escritor.write(emu);
+            escritor.close();
+            System.out.println("Archivo creado exitosamente");
+        }
+        catch(Exception e){
+            System.out.println("Ha ocurrido un error al crear el archivo");
+        }
+    }//generaEmu
+    
+    //sonido
+    public void Sonido(){
+        try {
+            File sonido = new File("src/arbolE/notification.wav");
+            if (sonido.exists()) {
+                AudioInputStream audioStream = AudioSystem.getAudioInputStream(sonido);
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioStream);
+                clip.start(); 
+            } else {
+                showMessageDialog(null, "No se encontró el archivo de sonido.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            showMessageDialog(null, "Error al reproducir el sonido.");
+        }
+    }
+    
     public void inOrden(Nodo n){
         if(n != null){
             inOrden(n.getIzq());
             jtxtInOrden.append(n.getDato()+"\n");
             
             inOrden(n.getDer());
+            
+            //15 de Julio           
+            
+            switch(n.getDato()){
+                case "+": 
+                    System.out.println("ADD - Ibarra Hernandez");
+                    izquierdo = n.getIzq().getDato();
+                    derecho = n.getDer().getDato();
+                    emuLocal +="MOV AX, " + n.getIzq().getDato() + "\n";
+                    emuLocal +="MOV BX, " + n.getDer().getDato() + "\n";
+                    emuLocal +="ADD AX,BX";
+                    
+                    
+                    break;
+                case "-":
+                    System.out.println("SUB");
+                    izquierdo = n.getIzq().getDato();
+                    derecho = n.getDer().getDato();
+                    break;
+                case "*": 
+                    System.out.println("MUL"); 
+                    izquierdo = n.getIzq().getDato();
+                    derecho = n.getDer().getDato();
+                    break;
+                case "/":
+                    System.out.println("DIV"); 
+                    izquierdo = n.getIzq().getDato();
+                    derecho = n.getDer().getDato();
+                    break;
+            }//fin switch
+            
         }    
     }
     
