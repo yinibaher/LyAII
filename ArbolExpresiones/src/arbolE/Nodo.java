@@ -17,6 +17,7 @@ package arbolE;
 public class Nodo {
     //Atributos
     private String dato;
+    private double valor;
     private Nodo padre;
     private Nodo izq;
     private Nodo der;
@@ -38,6 +39,10 @@ public class Nodo {
     public String getDato() {
         return dato;
     }
+    
+    public double getValor(){
+        return valor;
+    }
 
     public Nodo getPadre() {
         return padre;
@@ -50,7 +55,7 @@ public class Nodo {
     public Nodo getDer() {
         return der;
     }
-
+    
     public String getCodigoIntermedio() {
         return codigoIntermedio;
     }
@@ -61,6 +66,10 @@ public class Nodo {
 
     public void setDato(String dato) {
         this.dato = dato;
+    }
+    
+    public void setValor(double valor){
+        this.valor = valor;
     }
 
     public void setPadre(Nodo padre) {

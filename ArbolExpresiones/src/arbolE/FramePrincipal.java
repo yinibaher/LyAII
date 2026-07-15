@@ -57,7 +57,7 @@ public class FramePrincipal extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
+        btnAsignacion = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
         jPanel11 = new javax.swing.JPanel();
         jButton4 = new javax.swing.JButton();
@@ -177,8 +177,9 @@ public class FramePrincipal extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(20, 20, 0, 20);
         jPanel6.add(jButton8, gridBagConstraints);
 
-        jButton9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton9.setText("N Polaca");
+        btnAsignacion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnAsignacion.setText("Asigancion Individual");
+        btnAsignacion.addActionListener(this::btnAsignacionActionPerformed);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
@@ -186,7 +187,7 @@ public class FramePrincipal extends javax.swing.JFrame {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(20, 20, 0, 20);
-        jPanel6.add(jButton9, gridBagConstraints);
+        jPanel6.add(btnAsignacion, gridBagConstraints);
 
         jButton10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton10.setText("Estructuras Control");
@@ -217,7 +218,7 @@ public class FramePrincipal extends javax.swing.JFrame {
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                .addContainerGap(1448, Short.MAX_VALUE)
+                .addContainerGap(969, Short.MAX_VALUE)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18))
         );
@@ -237,6 +238,11 @@ public class FramePrincipal extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Interfaz.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnAsignacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsignacionActionPerformed
+        SSADiagrama ventana = new SSADiagrama();
+        ventana.setVisible(true);
+    }//GEN-LAST:event_btnAsignacionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -264,6 +270,7 @@ public class FramePrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAsignacion;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
@@ -273,7 +280,6 @@ public class FramePrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
