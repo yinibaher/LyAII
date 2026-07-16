@@ -708,7 +708,6 @@ public class FrameInterfaz extends javax.swing.JFrame {
         }
     }//generaEmu
     
-    //sonido
     public void Sonido(){
         try {
             File sonido = new File("src/arbolE/notification.wav");
@@ -724,7 +723,7 @@ public class FrameInterfaz extends javax.swing.JFrame {
             e.printStackTrace();
             showMessageDialog(null, "Error al reproducir el sonido.");
         }
-    }
+    }//sonido
     
     public void inOrden(Nodo n){
         if(n != null){
