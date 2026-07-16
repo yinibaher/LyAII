@@ -630,7 +630,7 @@ public class FrameInterfaz extends javax.swing.JFrame {
             writer.write(jtxtReglas.getText());
             writer.close();
 
-            System.out.println("Archivo guardado correctamente.");
+            System.out.println("Archivo .txt creado exitosamente.");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -692,10 +692,16 @@ public class FrameInterfaz extends javax.swing.JFrame {
 
     public void generaEmutasm(String emu, int i){
         try{
-            FileWriter escritor = new FileWriter("e"+i+".asm");
+            File archivo = new File("e" + i + ".asm");
+
+            FileWriter escritor = new FileWriter(archivo);
             escritor.write(emu);
             escritor.close();
-            System.out.println("Archivo creado exitosamente");
+
+            System.out.println("Archivo .asm creado exitosamente");
+                    
+            ProcessBuilder pb = new ProcessBuilder("C:\\emu8086\\emu8086.exe", archivo.getAbsolutePath());
+        pb.start();
         }
         catch(Exception e){
             System.out.println("Ha ocurrido un error al crear el archivo");
